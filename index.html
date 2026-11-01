@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Моя фотография</title>
+
     <style>
         body {
             margin: 0;
@@ -15,14 +16,73 @@
             background: #f2f2f2;
         }
 
+        /* Контейнер фотографии */
+        .photo-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        /* Фотография */
         img {
             max-width: 100%;
             height: auto;
             display: block;
         }
+
+        /* Дата и время */
+        #datetime {
+            position: absolute;
+
+            /* Положение даты */
+            bottom: 20px;
+            right: 20px;
+
+            /* Внешний вид */
+            color: white;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+
+            /* Тень для читаемости */
+            text-shadow: 2px 2px 4px black;
+
+            white-space: nowrap;
+        }
     </style>
 </head>
+
 <body>
-    <img src="chek.jpg" alt="Фотография">
+
+    <div class="photo-container">
+
+        <img src="chek.jpg" alt="Фотография">
+
+        <div id="datetime"></div>
+
+    </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const dateTime = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+
+            document.getElementById('datetime').textContent = dateTime;
+        }
+
+        // Обновляем время каждую секунду
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+
 </body>
 </html>
