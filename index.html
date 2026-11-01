@@ -18,24 +18,29 @@
             background: #f2f2f2;
         }
 
+        /* Контейнер фотографии */
         .photo-container {
             position: relative;
             display: inline-block;
             max-width: 100%;
         }
 
+        /* Фотография */
         img {
             max-width: 100%;
             height: auto;
             display: block;
         }
 
+        /* Дата и время */
         #datetime {
             position: absolute;
 
+            /* Положение даты */
             top: 266px;
             right: 385px;
 
+            /* Внешний вид */
             color: #A6A6A6;
             font-size: 18px;
             font-family: "Noto Sans Math", sans-serif;
@@ -69,14 +74,19 @@
 
             const dateTime = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
 
-            // Моноширинные математические цифры
-            const styledDate = dateTime.replace(/[0-9]/g, digit =>
-                String.fromCodePoint(0x1D7F6 + Number(digit))
-            );
+            // Преобразуем цифры в нужный стиль
+            const styledDate = dateTime.replace(/[0-9]/g, digit => {
+                if (digit === '0') return '𝟶';
+
+                return String.fromCodePoint(
+                    0x1D7F6 + Number(digit)
+                );
+            });
 
             document.getElementById('datetime').textContent = styledDate;
         }
 
+        // Отображаем время только один раз
         setDateTime();
     </script>
 
