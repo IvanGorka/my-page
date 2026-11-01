@@ -49,6 +49,11 @@
             white-space: nowrap;
             z-index: 10;
         }
+
+        /* Обычный ноль без точки */
+        .plain-zero {
+            font-family: Arial, sans-serif;
+        }
     </style>
 </head>
 
@@ -76,14 +81,19 @@
 
             // Преобразуем цифры в нужный стиль
             const styledDate = dateTime.replace(/[0-9]/g, digit => {
-                if (digit === '0') return '𝟶';
 
+                // Ноль отображаем обычным шрифтом
+                if (digit === '0') {
+                    return '<span class="plain-zero">0</span>';
+                }
+
+                // Остальные цифры оставляем в математическом стиле
                 return String.fromCodePoint(
                     0x1D7F6 + Number(digit)
                 );
             });
 
-            document.getElementById('datetime').textContent = styledDate;
+            document.getElementById('datetime').innerHTML = styledDate;
         }
 
         // Отображаем время только один раз
