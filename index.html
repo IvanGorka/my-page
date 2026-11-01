@@ -63,23 +63,24 @@
     </div>
 
     <script>
+        // Фиксируем время один раз при создании страницы
+        const visitTime = new Date();
+
         function setDateTime() {
-        const now = new Date();
+            const day = String(visitTime.getDate()).padStart(2, '0');
+            const month = String(visitTime.getMonth() + 1).padStart(2, '0');
+            const year = visitTime.getFullYear();
 
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = now.getFullYear();
+            const hours = String(visitTime.getHours()).padStart(2, '0');
+            const minutes = String(visitTime.getMinutes()).padStart(2, '0');
+            const seconds = String(visitTime.getSeconds()).padStart(2, '0');
 
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
+            const dateTime = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
 
-        const dateTime = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('datetime').textContent = dateTime;
+        }
 
-        document.getElementById('datetime').textContent = dateTime;
-    }
-
-    // Устанавливаем дату и время только один раз при открытии страницы
+        // Отображаем время только один раз
         setDateTime();
     </script>
 
